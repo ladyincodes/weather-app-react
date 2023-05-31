@@ -3,6 +3,7 @@ import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
 import "./Weather.css";
 import Footer from "./Footer";
+import FormattedDate from "./FormattedDate";
 
 export default function Weather(props) {
   let [weatherData, setWeatherData] = useState({ ready: false });
@@ -13,7 +14,7 @@ export default function Weather(props) {
       ready: true,
       city: response.data.city,
       tempreture: Math.round(response.data.temperature.current),
-      date: "Thursday 14:00",
+      date: new Date(response.data.time * 1000),
       description: response.data.condition.description,
       imgUrl: response.data.condition.icon_url,
       humidity: response.data.temperature.humidity,
@@ -72,7 +73,9 @@ export default function Weather(props) {
             <div className='observations col-sm-6 text-end'>
               <ul>
                 <li>
-                  <span>Last updated: {weatherData.date}</span>
+                  <span>
+                    <FormattedDate date={weatherData.date} />
+                  </span>
                 </li>
                 <li className='text-capitalize'>{weatherData.description}</li>
                 <li>
