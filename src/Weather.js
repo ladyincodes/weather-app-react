@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
 import "./Weather.css";
 import Footer from "./Footer";
@@ -98,6 +99,21 @@ export default function Weather(props) {
     let apiUrl = `${apiEndPoint}query=${props.defaultCity}&key=${apiKey}&units=${units}`;
     axios.get(apiUrl).then(handleResponse);
 
-    return "Loading...";
+    return (
+      <div className='Weather container shadow-lg fixed-container d-flex justify-content-center'>
+        <div className='mb-3'>
+          <ThreeDots
+            height='80'
+            width='80'
+            radius='9'
+            color='#F3F0FD'
+            ariaLabel='three-dots-loading'
+            wrapperStyle={{}}
+            wrapperClassName=''
+            visible={true}
+          />
+        </div>
+      </div>
+    );
   }
 }
