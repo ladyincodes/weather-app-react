@@ -3,7 +3,7 @@ import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
 import "./Weather.css";
 import Footer from "./Footer";
-import FormattedDate from "./FormattedDate";
+import WeatherInfo from "./WeatherInfo";
 
 export default function Weather(props) {
   let [weatherData, setWeatherData] = useState({ ready: false });
@@ -54,43 +54,7 @@ export default function Weather(props) {
             </form>
           </div>
           <hr className='mt-4' />
-
-          <h2 className='display-5 mt-4 fw-bolder'>{weatherData.city}</h2>
-
-          <div className='todays-forcast row'>
-            <div className='display-tempreture col-sm-6'>
-              <img src={weatherData.imgUrl} alt='Clear' />
-              <span className='current-tempreture' data-name='temperature'>
-                {weatherData.tempreture}
-              </span>
-              <span className='fs-5 tempreture-unit text-end'>
-                <a href='/'>°C</a>
-                <span> | </span>
-                <a href='/'>°F</a>
-              </span>
-            </div>
-
-            <div className='observations col-sm-6 text-end'>
-              <ul>
-                <li>
-                  <span>
-                    <FormattedDate date={weatherData.date} />
-                  </span>
-                </li>
-                <li className='text-capitalize'>{weatherData.description}</li>
-                <li>
-                  Humidity:{" "}
-                  <span className='bolded-information'>
-                    {weatherData.humidity}%
-                  </span>
-                  , Wind:
-                  <span className='bolded-information'>
-                    {weatherData.wind}km/h
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <WeatherInfo data={weatherData} />
           <hr className='mt-4' />
           <Footer />
         </div>
