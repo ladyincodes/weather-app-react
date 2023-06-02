@@ -18,7 +18,7 @@ export default function Weather(props) {
       setWeatherData({
         ready: true,
         city: response.data.city,
-        tempreture: Math.round(response.data.temperature.current),
+        tempreture: response.data.temperature.current,
         date: new Date(response.data.time * 1000),
         description: response.data.condition.description,
         icon: response.data.condition.icon,

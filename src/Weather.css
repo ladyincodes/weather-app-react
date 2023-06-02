@@ -14,7 +14,8 @@
 
 .Weather .tempreture-unit {
     position: relative;
-    top: -38px;
+    top: -37px;
+    margin-left: 3px;
 }
 
 .Weather .current-tempreture {
