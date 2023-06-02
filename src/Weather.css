@@ -12,10 +12,6 @@
     font-weight: bold;
 }
 
-.Weather .weather-icon {
-    font-size: 30px;
-}
-
 .Weather .tempreture-unit {
     position: relative;
     top: -38px;
@@ -23,14 +19,14 @@
 
 .Weather .current-tempreture {
     color: rgb(33, 33, 33);
-    padding-right: 5px;
     font-size: 70px;
     font-weight: 600;
 }
 
-.Weather .display-tempreture img {
+.Weather canvas {
     position: relative;
-    top: -22px;
+    top: 5px;
+    margin-right: 10px;
 }
 
 .Weather .observations {
@@ -96,12 +92,8 @@
     opacity: 0.5;
 }
 
-/* .Weather #city-title {
-  color: rgb(33, 33, 33);
-  font-size: 40px;
-  font-weight: 700;
-} */
-
-/* .Weather #author {
-  color: rgba(33, 37, 42, 0.5);
-} */
+.Weather .city-title {
+    color: rgb(33, 33, 33);
+    font-size: 40px;
+    font-weight: 700;
+}

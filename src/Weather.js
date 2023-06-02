@@ -12,6 +12,8 @@ export default function Weather(props) {
   let units = "metric";
 
   function handleResponse(response) {
+    console.log(response.data);
+
     if (response.data.status !== "not_found") {
       setWeatherData({
         ready: true,
@@ -19,7 +21,7 @@ export default function Weather(props) {
         tempreture: Math.round(response.data.temperature.current),
         date: new Date(response.data.time * 1000),
         description: response.data.condition.description,
-        imgUrl: response.data.condition.icon_url,
+        icon: response.data.condition.icon,
         humidity: response.data.temperature.humidity,
         wind: Math.round(response.data.wind.speed),
       });
