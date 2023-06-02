@@ -6,20 +6,66 @@ import Footer from "./Footer";
 import WeatherInfo from "./WeatherInfo";
 
 export default function Weather(props) {
-  let [weatherData, setWeatherData] = useState({ ready: false });
+  const [city, setCity] = useState(props.defaultCity);
+  const [weatherData, setWeatherData] = useState({ ready: false });
+  const [currentLocation, setCurrentLocation] = useState(false);
   let units = "metric";
 
   function handleResponse(response) {
-    setWeatherData({
-      ready: true,
-      city: response.data.city,
-      tempreture: Math.round(response.data.temperature.current),
-      date: new Date(response.data.time * 1000),
-      description: response.data.condition.description,
-      imgUrl: response.data.condition.icon_url,
-      humidity: response.data.temperature.humidity,
-      wind: Math.round(response.data.wind.speed),
-    });
+    if (response.data.status !== "not_found") {
+      setWeatherData({
+        ready: true,
+        city: response.data.city,
+        tempreture: Math.round(response.data.temperature.current),
+        date: new Date(response.data.time * 1000),
+        description: response.data.condition.description,
+        imgUrl: response.data.condition.icon_url,
+        humidity: response.data.temperature.humidity,
+        wind: Math.round(response.data.wind.speed),
+      });
+    } else {
+      // if the data status was "not_found", it means there was no result
+      canNotFindCity();
+    }
+  }
+
+  function search() {
+    const apiKey = "fb62bofac6t015b438385b08ffd2a8bd";
+    let apiEndPoint = `https://api.shecodes.io/weather/v1/current?`;
+    let apiUrl = `${apiEndPoint}query=${city}&key=${apiKey}&units=${units}`;
+    axios.get(apiUrl).then(handleResponse).catch(canNotFindCity);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+
+  function canNotFindCity() {
+    alert("Please enter a valid city!");
+  }
+
+  // retrive current position latitude and longitude
+  function getPosition(position) {
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+    let apiKey = "fb62bofac6t015b438385b08ffd2a8bd";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=${units}`;
+
+    axios.get(apiUrl).then(handleResponse).catch(canNotFindCity);
+    // enables current btn after fatched data
+    setCurrentLocation(false);
+  }
+
+  // get current
+  function getCurrentLocation(event) {
+    // // disables current btn until fetching data
+    setCurrentLocation(true);
+    navigator.geolocation.getCurrentPosition(getPosition);
   }
 
   if (weatherData.ready) {
@@ -27,7 +73,7 @@ export default function Weather(props) {
       <div className='Weather'>
         <div className='container shadow-lg fixed-container'>
           <div className='search mt-2'>
-            <form className='search-form'>
+            <form className='search-form' onSubmit={handleSubmit}>
               <div className='row'>
                 <div className='col-sm-6'>
                   <input
@@ -35,6 +81,7 @@ export default function Weather(props) {
                     className='form-control'
                     placeholder='Enter a city...'
                     autoFocus='on'
+                    onChange={handleCityChange}
                   />
                 </div>
                 <div className='col-sm-3 mt-2 mt-sm-0 pe-sm-1'>
@@ -43,12 +90,25 @@ export default function Weather(props) {
                   </button>
                 </div>
                 <div className='col-sm-3 mt-2 mt-sm-0 ps-sm-2'>
-                  <button
-                    type='submit'
-                    className='btn-pink-secondary form-control'
-                  >
-                    Current
-                  </button>
+                  {currentLocation ? (
+                    <button
+                      className='btn-pink-secondary form-control'
+                      disabled
+                    >
+                      <span
+                        className='spinner-border spinner-border-sm'
+                        role='status'
+                        aria-hidden='true'
+                      ></span>
+                    </button>
+                  ) : (
+                    <button
+                      className='btn-pink-secondary form-control'
+                      onClick={getCurrentLocation}
+                    >
+                      Current
+                    </button>
+                  )}
                 </div>
               </div>
             </form>
@@ -61,11 +121,7 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    const apiKey = "fb62bofac6t015b438385b08ffd2a8bd";
-    let apiEndPoint = `https://api.shecodes.io/weather/v1/current?`;
-    let apiUrl = `${apiEndPoint}query=${props.defaultCity}&key=${apiKey}&units=${units}`;
-    axios.get(apiUrl).then(handleResponse);
-
+    search();
     return (
       <div className='Weather container shadow-lg fixed-container d-flex justify-content-center'>
         <div className='mb-3'>
