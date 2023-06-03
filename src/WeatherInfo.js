@@ -2,6 +2,7 @@ import React from "react";
 import FormattedDate from "./FormattedDate";
 import WeatherIcon from "./WeatherIcon";
 import WeatherTemperature from "./WeatherTemperature";
+import Wind from "./Wind";
 
 export default function WeatherInfo(props) {
   return (
@@ -26,7 +27,9 @@ export default function WeatherInfo(props) {
               Humidity:{" "}
               <span className='bolded-information'>{props.data.humidity}%</span>
               , Wind:
-              <span className='bolded-information'>{props.data.wind}km/h</span>
+              <span className='bolded-information'>
+                <Wind data={props.data.wind} />
+              </span>
             </li>
           </ul>
         </div>

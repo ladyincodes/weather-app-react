@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { UnitsContext } from "./UnitsContext";
 
 export default function WeatherTemperature(props) {
-  const [unit, setUnit] = useState("metric");
+  const [unit, setUnit] = useContext(UnitsContext);
 
   function showCelsius(event) {
     event.preventDefault();

@@ -4,16 +4,15 @@ import axios from "axios";
 import "./Weather.css";
 import Footer from "./Footer";
 import WeatherInfo from "./WeatherInfo";
+import { UnitsContext } from "./UnitsContext";
 
 export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity);
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [currentLocation, setCurrentLocation] = useState(false);
-  let units = "metric";
+  const [unit, setUnit] = useState("metric");
 
   function handleResponse(response) {
-    console.log(response.data);
-
     if (response.data.status !== "not_found") {
       setWeatherData({
         ready: true,
@@ -34,7 +33,7 @@ export default function Weather(props) {
   function search() {
     const apiKey = "fb62bofac6t015b438385b08ffd2a8bd";
     let apiEndPoint = `https://api.shecodes.io/weather/v1/current?`;
-    let apiUrl = `${apiEndPoint}query=${city}&key=${apiKey}&units=${units}`;
+    let apiUrl = `${apiEndPoint}query=${city}&key=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse).catch(canNotFindCity);
   }
 
@@ -56,7 +55,7 @@ export default function Weather(props) {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
     let apiKey = "fb62bofac6t015b438385b08ffd2a8bd";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=${units}`;
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=metric`;
 
     axios.get(apiUrl).then(handleResponse).catch(canNotFindCity);
     // enables current btn after fatched data
@@ -116,7 +115,9 @@ export default function Weather(props) {
             </form>
           </div>
           <hr className='mt-4' />
-          <WeatherInfo data={weatherData} />
+          <UnitsContext.Provider value={[unit, setUnit]}>
+            <WeatherInfo data={weatherData} />
+          </UnitsContext.Provider>
           <hr className='mt-4' />
           <Footer />
         </div>
