@@ -119,7 +119,7 @@ export default function Weather(props) {
           <hr className='mt-4' />
           <UnitsContext.Provider value={[unit, setUnit]}>
             <WeatherInfo data={weatherData} />
-            <hr className='mt-4' />
+            <hr className='mt-1' />
             <WeatherForecast coordinates={weatherData.coordinates} />
           </UnitsContext.Provider>
           <hr className='mt-4' />
