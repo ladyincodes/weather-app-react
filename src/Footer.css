@@ -1,3 +1,7 @@
 .Footer .author {
     color: rgba(33, 37, 42, 0.5);
 }
+
+.Footer a {
+    color: rgb(245, 78, 162);
+}

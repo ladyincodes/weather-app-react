@@ -17,7 +17,6 @@ li::first-letter {
 
 a {
   text-decoration: none;
-  color: rgba(33, 37, 42, 0.5);
 }
 
 input[type="text"],
@@ -28,10 +27,6 @@ textarea {
 
 input[type="text"]::placeholder {
   color: rgba(39, 33, 66, 0.4);
-}
-
-footer a {
-  color: rgb(245, 78, 162);
 }
 
 hr {

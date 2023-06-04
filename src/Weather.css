@@ -7,6 +7,10 @@
     border-radius: 15px;
 }
 
+.Weather .tempreture-unit a {
+    color: rgba(33, 37, 42, 0.5);
+}
+
 .Weather .selected_tempreture {
     color: rgb(33, 33, 33);
     font-weight: bold;
