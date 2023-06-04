@@ -5,6 +5,7 @@ import "./Weather.css";
 import Footer from "./Footer";
 import WeatherInfo from "./WeatherInfo";
 import { UnitsContext } from "./UnitsContext";
+import WeatherForecast from "./WeatherForecast";
 
 export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity);
@@ -118,6 +119,8 @@ export default function Weather(props) {
           <UnitsContext.Provider value={[unit, setUnit]}>
             <WeatherInfo data={weatherData} />
           </UnitsContext.Provider>
+          <hr className='mt-4' />
+          <WeatherForecast />
           <hr className='mt-4' />
           <Footer />
         </div>

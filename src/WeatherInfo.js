@@ -11,7 +11,7 @@ export default function WeatherInfo(props) {
 
       <div className='todays-forcast row'>
         <div className='display-tempreture col-sm-6'>
-          <WeatherIcon data={props.data.icon} />
+          <WeatherIcon data={props.data.icon} size={60} />
           <WeatherTemperature data={props.data.tempreture} />
         </div>
 
