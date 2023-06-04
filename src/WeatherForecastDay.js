@@ -1,14 +1,15 @@
 import React from "react";
 import WeatherIcon from "./WeatherIcon";
+import UnitConversion from "./UnitConversion";
 
 export default function WeatherForecastDay(props) {
   function maxTemperature() {
-    let max = `${Math.round(props.forecast.temperature.maximum)}°`;
+    let max = Math.round(props.forecast.temperature.maximum);
     return max;
   }
 
   function minTemperature() {
-    let min = `${Math.round(props.forecast.temperature.minimum)}°`;
+    let min = Math.round(props.forecast.temperature.minimum);
     return min;
   }
 
@@ -24,10 +25,12 @@ export default function WeatherForecastDay(props) {
       <WeatherIcon data={props.forecast.condition.icon} size={36} />
       <div className='WeatherForcast-temperature'>
         <span className='WeatherForcast-temperature-max'>
-          {maxTemperature()}
+          <UnitConversion data={maxTemperature()} type='temperature' />
+          {"°"}
         </span>
         <span className='WeatherForcast-temperature-min'>
-          {minTemperature()}
+          <UnitConversion data={minTemperature()} type='temperature' />
+          {"°"}
         </span>
       </div>
     </>

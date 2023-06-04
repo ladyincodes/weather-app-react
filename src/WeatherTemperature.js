@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { UnitsContext } from "./UnitsContext";
+import UnitConversion from "./UnitConversion";
 
 export default function WeatherTemperature(props) {
   const [unit, setUnit] = useContext(UnitsContext);
@@ -17,7 +18,9 @@ export default function WeatherTemperature(props) {
   if (unit === "metric") {
     return (
       <span className='WeatherTemperature'>
-        <span className='current-tempreture'>{Math.round(props.data)}</span>
+        <span className='current-tempreture'>
+          <UnitConversion data={props.data} type='temperature' />
+        </span>
         <span className='fs-5 tempreture-unit text-end'>
           <span className='selected_tempreture'>°C</span>
           <span> | </span>
@@ -28,10 +31,11 @@ export default function WeatherTemperature(props) {
       </span>
     );
   } else {
-    let fahrenheit = Math.round((props.data * 9) / 5 + 32);
     return (
       <span className='WeatherTemperature'>
-        <span className='current-tempreture'>{fahrenheit}</span>
+        <span className='current-tempreture'>
+          <UnitConversion data={props.data} type='temperature' />
+        </span>
         <span className='fs-5 tempreture-unit text-end'>
           <a href='/' onClick={showCelsius}>
             °C

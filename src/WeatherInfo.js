@@ -2,7 +2,7 @@ import React from "react";
 import FormattedDate from "./FormattedDate";
 import WeatherIcon from "./WeatherIcon";
 import WeatherTemperature from "./WeatherTemperature";
-import Wind from "./Wind";
+import UnitConversion from "./UnitConversion";
 
 export default function WeatherInfo(props) {
   return (
@@ -28,7 +28,7 @@ export default function WeatherInfo(props) {
               <span className='bolded-information'>{props.data.humidity}%</span>
               , Wind:
               <span className='bolded-information'>
-                <Wind data={props.data.wind} />
+                <UnitConversion data={props.data.wind} type='wind' />
               </span>
             </li>
           </ul>
