@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./WeatherForecast.css";
 import WeatherForecastDay from "./WeatherForecastDay";
+import Loading from "./Loading";
 
 export default function WeatherForecast(props) {
   const [loaded, setLoaded] = useState(false);
@@ -44,6 +45,10 @@ export default function WeatherForecast(props) {
     );
   } else {
     load();
-    return "Loading...";
+    return (
+      <div className='WeatherForecast'>
+        <Loading height='20' />
+      </div>
+    );
   }
 }
