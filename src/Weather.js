@@ -17,6 +17,7 @@ export default function Weather(props) {
     if (response.data.status !== "not_found") {
       setWeatherData({
         ready: true,
+        coordinates: response.data.coordinates,
         city: response.data.city,
         tempreture: response.data.temperature.current,
         date: new Date(response.data.time * 1000),
@@ -120,7 +121,7 @@ export default function Weather(props) {
             <WeatherInfo data={weatherData} />
           </UnitsContext.Provider>
           <hr className='mt-4' />
-          <WeatherForecast />
+          <WeatherForecast coordinates={weatherData.coordinates} />
           <hr className='mt-4' />
           <Footer />
         </div>
