@@ -2,6 +2,8 @@
 
 A weather app, developed by ReactJs.
 
+![Screenshot 2023-06-07 at 6 35 28 PM](https://github.com/ladyincodes/weather-app-react/assets/111862613/fed37581-8da6-43a7-8785-4b87573a7e9f)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
